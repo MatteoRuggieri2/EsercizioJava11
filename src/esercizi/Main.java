@@ -1,34 +1,16 @@
 package esercizi;
 
-import java.util.Scanner;
-
 public class Main {
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
 		
-		String userString = "";
-		
-		
-		// Finchè l'utente non digita "termina programma" continuo a richiedere una stringa e stamparla
-		while (!userString.equalsIgnoreCase("stop")) {
-			
-			
-			
-			// System.out.println("valore di userString: " + userString);
-			
-			// Chiedo stringa
-			System.out.println("-- DIGITA UNA STRINGA --");
-			userString = scanner.nextLine();
-			
-			// Stampo stringa
-			System.out.println("stringa stampata: " + userString);
-			
-			
-		}
-		
-		scanner.close();
-		System.out.println("Programma terminato!");
+		// CON STRINGA VUOTA NON FUNZIONA - Dovrebbe darmi NO FILES
+//		String filesList = "1988-08-29 956 system.zip 1995-10-12 245760 old-photos.tgz 1989-11-05 245761 file2.rar 1994-12-01 845 very-long-filename.rar 1988-11-05 400 file1.txt";
+		String filesList = "1994-12-01 845 very-long-filename.rar.zip";
+
+		ScanFileNames scanFileNames = new ScanFileNames();
+
+		System.out.println("Output: " + scanFileNames.solution(filesList));
 
 	}
 
