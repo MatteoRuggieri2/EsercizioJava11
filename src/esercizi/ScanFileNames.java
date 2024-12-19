@@ -19,7 +19,7 @@ public class ScanFileNames {
 	/* Scartare il file corretto individuato se size > (240K) */
 	
 	
-	// Stringa di esempio: "1988-08-29 956 system.zip"
+	//TODO Stringa di esempio: "1988-08-29 956 system.zip"
 	
 	
 	// COSTRUTTORE
@@ -36,6 +36,7 @@ public class ScanFileNames {
 		String[] ALLOWED_SUFFIX_ARRAY = {"rar", "zip", "tgz"};
 		
 		// DATA
+		String[] filesArray;
 		String fileCompleteName = "";  // name + suffix
 		String fileDate = "";
 		int fileSize = 0;
@@ -48,8 +49,32 @@ public class ScanFileNames {
 		int validFilesCounter = 0;
 		
 		
-		// Apro scanner e gli passo la stringa
+		// Apro scanner e gli passo la stringa con tutti i file
 		Scanner sc = new Scanner(s);
+		
+		// Calcolo il numero di file presenti
+		int fileCounter = 0;
+		int tokenCounter = 0;
+		
+		//TODO Ogni 3 token fileCounter++  //BUG Ciclo infinito
+		while (sc.hasNext()) {
+			tokenCounter++;
+			if (tokenCounter == 3) {
+				fileCounter++;
+				tokenCounter = 0;
+			}
+		}
+		
+		
+		
+		// Prendo i file e li metto in un array (ogni 3 token)
+		String singleElement = "";
+		for (int i = 0; i < 3; i++) {
+			singleElement += sc.next() + " ";
+		}
+		// Aggiungo l'elemento nell'array, ma non so la dimensione dell'array
+		
+		
 		
 		// Finchè è presente un token
 		while (sc.hasNext()) {
