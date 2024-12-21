@@ -19,7 +19,7 @@ public class ScanFileNames {
 	/* Scartare il file corretto individuato se size > (240K) */
 	
 	
-	//TODO Stringa di esempio: "1988-08-29 956 system.zip"
+	//Stringa filefi di esempio: "1988-08-29 956 system.zip"
 	
 	
 	// COSTRUTTORE
@@ -27,56 +27,37 @@ public class ScanFileNames {
 //		System.out.println("Counter di file corretti: " + solution(s));
 //	}
 
+	// COSTANT
+	LocalDate LIMIT_DATE = LocalDate.of(1995, 10, 13);
+	int MAX_KILO_BYTE_FILE_SIZE = 240;
+	int MAX_BYTE_FILE_SIZE = MAX_KILO_BYTE_FILE_SIZE * 1024;   // 1KB = 1024 B
+	String[] ALLOWED_SUFFIX_ARRAY = {"rar", "zip", "tgz"};
+	
+	// DATA
+	String[] filesArray;
+	
 	public String solution(String s) {
 		
-		// COSTANT
-		LocalDate LIMIT_DATE = LocalDate.of(1995, 10, 13);
-		int MAX_KILO_BYTE_FILE_SIZE = 240;
-		int MAX_BYTE_FILE_SIZE = MAX_KILO_BYTE_FILE_SIZE * 1024;   // 1KB = 1024 B
-		String[] ALLOWED_SUFFIX_ARRAY = {"rar", "zip", "tgz"};
-		
-		// DATA
-		String[] filesArray;
-		String fileCompleteName = "";  // name + suffix
-		String fileDate = "";
-		int fileSize = 0;
-		String fileName = "";  // name
-		String fileSuffix = "";
-		boolean fileDateCheck = false;
-		boolean fileSizeCheck = false;
-		boolean fileExtensionCheck = false;
-		boolean fileSuffixCheck = false;
-		int validFilesCounter = 0;
+//		String fileCompleteName = "";  // name + suffix
+//		String fileDate = "";
+//		int fileSize = 0;
+//		String fileName = "";  // name
+//		String fileSuffix = "";
+//		boolean fileDateCheck = false;
+//		boolean fileSizeCheck = false;
+//		boolean fileExtensionCheck = false;
+//		boolean fileSuffixCheck = false;
+//		int validFilesCounter = 0;
 		
 		
 		// Apro scanner e gli passo la stringa con tutti i file
-		Scanner sc = new Scanner(s);
+//		Scanner sc = new Scanner(s);
 		
-		// Calcolo il numero di file presenti
-		int fileCounter = 0;
-		int tokenCounter = 0;
+		//Salvo i file della stringa nell'array
+		saveFilesToArray(s);
 		
-		//Ogni 3 token conteggio 1 file (fileCounter++)
-		while (sc.hasNext()) {
-			tokenCounter++;
-			System.out.println(sc.next());
-			if (tokenCounter == 3) {
-				fileCounter++;
-				tokenCounter = 0;
-			}
-		}
 		
-//		
-//		
-//		// Prendo i file e li metto in un array (ogni 3 token)
-//		String singleElement = "";
-//		for (int i = 0; i < 3; i++) {
-//			singleElement += sc.next() + " ";
-//		}
-//		// Aggiungo l'elemento nell'array, ma non so la dimensione dell'array
-//		
-//		
-//		
+		
 //		// Finchè è presente un token
 //		while (sc.hasNext()) {
 //			fileDate = sc.next();
@@ -157,5 +138,51 @@ public class ScanFileNames {
 		
 		//test
 		return "";
+	}
+	
+	// Sapendo che ognuno è composto da 3 token, conta il numero di file
+	private int filesCounter(String filesList) {
+		int fileCounter = 0;
+		int tokenCounter = 0;
+		
+		Scanner sc = new Scanner(filesList);
+		
+		//Ogni 3 token conteggio 1 file (fileCounter++)
+		while (sc.hasNext()) {
+			tokenCounter++;
+			sc.next();
+			if (tokenCounter == 3) {
+				fileCounter++;
+				tokenCounter = 0;
+			}
+		}
+		
+		return fileCounter;
+	}
+	
+	// Salva i file dentro l'array (filesArray) della classe
+	private void saveFilesToArray(String filesList) {
+		
+		// Conto il numero di file presenti nell'elenco per dimensionare l'array
+		int filesQuantity = filesCounter(filesList);
+		this.filesArray = new String[filesQuantity];
+		
+		Scanner sc = new Scanner(filesList);
+
+		String file = "";
+		int fileNumber = 0;
+		int tokenCounter = 0;
+		
+		//Ogni 3 token conteggio 1 file (fileCounter++)
+		while (sc.hasNext()) {
+			file += sc.next() + " ";
+			tokenCounter++;
+			if (tokenCounter == 3) {
+				this.filesArray[fileNumber] = file.trim();
+				file = "";
+				fileNumber++;
+				tokenCounter = 0;
+			}
+		}
 	}
 }
