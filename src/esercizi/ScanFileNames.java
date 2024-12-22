@@ -60,7 +60,7 @@ public class ScanFileNames {
 		this.filesArray = saveFilesToArray(s);
 		
 		// Filtro i file per dimensione
-		filterFilesBySize(filesArray, MAX_BYTE_FILE_SIZE);
+		this.filesArray = filterFilesBySize(filesArray, MAX_BYTE_FILE_SIZE);
 		
 		
 		
@@ -167,13 +167,11 @@ public class ScanFileNames {
 		return fileCounter;
 	}
 	
-	// TODO -> SAREBBE MEGLIO CHE QUESTO METODO RESTITUISSE UN ARRAY, E POI VAI A SALVARLO DENTRO QUELLO DELLA CLASSE
 	// Salva i file dentro l'array (filesArray) della classe
 	private String[] saveFilesToArray(String filesList) {
 		
 		// Conto il numero di file presenti nell'elenco per dimensionare l'array
 		int filesQuantity = filesCounter(filesList);
-//		this.filesArray = new String[filesQuantity];
 		String[] resultArray = new String[filesQuantity];
 		
 		
@@ -188,7 +186,6 @@ public class ScanFileNames {
 			file += sc.next() + " ";
 			tokenCounter++;
 			if (tokenCounter == 3) {
-//				this.filesArray[fileNumber] = file.trim();
 				resultArray[fileNumber] = file.trim();
 				file = "";
 				fileNumber++;
@@ -200,9 +197,8 @@ public class ScanFileNames {
 		return resultArray;
 	}
 	
-	// TODO -> SAREBBE MEGLIO CHE TORNASSE UN NUOVO ARRAY FILTRATO, POI VAI A SOVRASCRIVERE QUELLO DELLA CLASSE
 	// Questo metodo filtra i file per la dimensione
-	private void filterFilesBySize(String[] filesArray, int maxSize) {
+	private String[] filterFilesBySize(String[] filesArray, int maxSize) {
 		
 		String filesFilteredBySizeStr = "";
 		
@@ -215,6 +211,6 @@ public class ScanFileNames {
 		}
 		
 		// Aggiorno l'array con i file filtrati per dimensione
-		this.filesArray = filesFilteredBySizeStr.split("\\*sep\\*");
+		return filesFilteredBySizeStr.split("\\*sep\\*");
 	}
 }
