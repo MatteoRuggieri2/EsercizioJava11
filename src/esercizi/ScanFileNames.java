@@ -27,14 +27,19 @@ public class ScanFileNames {
 //		System.out.println("Counter di file corretti: " + solution(s));
 //	}
 
+	
+	
 	// COSTANT
 	LocalDate LIMIT_DATE = LocalDate.of(1995, 10, 13);
 	int MAX_KILO_BYTE_FILE_SIZE = 240;
-	int MAX_BYTE_FILE_SIZE = MAX_KILO_BYTE_FILE_SIZE * 1024;   // 1KB = 1024 B
+	int MAX_BYTE_FILE_SIZE = MAX_KILO_BYTE_FILE_SIZE * 1024;   // 1KB = 1024 B | Tot. 245760B
 	String[] ALLOWED_SUFFIX_ARRAY = {"rar", "zip", "tgz"};
 	
 	// DATA
 	String[] filesArray;
+	String[] filteredFilesArray;
+	
+	
 	
 	public String solution(String s) {
 		
@@ -55,6 +60,9 @@ public class ScanFileNames {
 		
 		//Salvo i file della stringa nell'array
 		saveFilesToArray(s);
+		
+		// Filtro i file per dimensione
+		String[] filteredBySize = filterFilesBySize(filesArray);
 		
 		
 		
@@ -157,6 +165,7 @@ public class ScanFileNames {
 			}
 		}
 		
+		sc.close();
 		return fileCounter;
 	}
 	
@@ -184,5 +193,27 @@ public class ScanFileNames {
 				tokenCounter = 0;
 			}
 		}
+		
+		sc.close();
+	}
+	
+	private String[] filterFilesBySize(String[] filesArray) {
+		
+		String filesFilteredBySizeStr = "";
+//		String[] filesFilteredBySizeArr;
+		
+		for (String file : filesArray) {
+			String[] fileInfo = file.split(" ");
+			int fileSize = Integer.parseInt(fileInfo[1]);
+			if (fileSize <= this.MAX_BYTE_FILE_SIZE) {
+				filesFilteredBySizeStr += file + "*sep*";
+			}
+		}
+		
+		// Trasformo la stringa in array
+//		filesFilteredBySizeArr = new String[filesCounter(filesFilteredBySizeStr)];
+		
+		
+		return filesFilteredBySizeStr.split("\\*sep\\*");
 	}
 }
