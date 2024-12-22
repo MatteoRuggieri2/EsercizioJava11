@@ -30,7 +30,7 @@ Esempio di stringa in input:
 Il _**conteggio dei file**_ o "_**NO FILES**_" in caso non fossero presenti.
 Conteggia solo i file **precedenti** al **13 Ottobre 1995**
 
-Non contare i file se:
+Ritorna "INPUT INVALID" in questi casi:
 
 - Se size > 240K (240000)
 - Se non c'è estensione (.)
