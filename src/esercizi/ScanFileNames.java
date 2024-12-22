@@ -55,14 +55,12 @@ public class ScanFileNames {
 //		int validFilesCounter = 0;
 		
 		
-		// Apro scanner e gli passo la stringa con tutti i file
-//		Scanner sc = new Scanner(s);
 		
 		//Salvo i file della stringa nell'array
 		saveFilesToArray(s);
 		
 		// Filtro i file per dimensione
-		String[] filteredBySize = filterFilesBySize(filesArray);
+		filterFilesBySize(filesArray, MAX_BYTE_FILE_SIZE);
 		
 		
 		
@@ -197,23 +195,20 @@ public class ScanFileNames {
 		sc.close();
 	}
 	
-	private String[] filterFilesBySize(String[] filesArray) {
+	// Questo metodo filtra i file per la dimensione
+	private void filterFilesBySize(String[] filesArray, int maxSize) {
 		
 		String filesFilteredBySizeStr = "";
-//		String[] filesFilteredBySizeArr;
 		
 		for (String file : filesArray) {
 			String[] fileInfo = file.split(" ");
 			int fileSize = Integer.parseInt(fileInfo[1]);
-			if (fileSize <= this.MAX_BYTE_FILE_SIZE) {
+			if (fileSize <= maxSize) {
 				filesFilteredBySizeStr += file + "*sep*";
 			}
 		}
 		
-		// Trasformo la stringa in array
-//		filesFilteredBySizeArr = new String[filesCounter(filesFilteredBySizeStr)];
-		
-		
-		return filesFilteredBySizeStr.split("\\*sep\\*");
+		// Aggiorno l'array con i file filtrati per dimensione
+		this.filesArray = filesFilteredBySizeStr.split("\\*sep\\*");
 	}
 }
