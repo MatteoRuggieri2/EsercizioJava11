@@ -56,11 +56,18 @@ public class ScanFileNames {
 		
 		
 		
-		//Salvo i file della stringa nell'array
+		// Salvo i file della stringa nell'array
 		this.filesArray = saveFilesToArray(s);
 		
+		// Controllo se input è formato correttamente, altrimenti return "INPUT INVALID"
+		if (!checkInput(this.filesArray)) {
+			return "INPUT INVALID";
+		}
+		
+		// Se tutti i file sono OK, li filtro e poi li conto. Se sono zero ritorno "NO FILES"
+		
 		// Filtro i file per dimensione
-		this.filesArray = filterFilesBySize(filesArray, MAX_BYTE_FILE_SIZE);
+//		this.filesArray = filterFilesBySize(filesArray, MAX_BYTE_FILE_SIZE);
 		
 		
 		
@@ -174,7 +181,6 @@ public class ScanFileNames {
 		int filesQuantity = filesCounter(filesList);
 		String[] resultArray = new String[filesQuantity];
 		
-		
 		Scanner sc = new Scanner(filesList);
 
 		String file = "";
@@ -213,4 +219,58 @@ public class ScanFileNames {
 		// Aggiorno l'array con i file filtrati per dimensione
 		return filesFilteredBySizeStr.split("\\*sep\\*");
 	}
+	
+	private boolean checkInput(String[] filesList) {
+		
+		for (String file : filesList) {
+			
+			// Controllo la struttura (string, int, string)
+			if (!checkFileStructure(file)) { return false; }
+		
+			// Controllo che la dimensione non sia maggiore di 240KB
+			
+			// Controllo che ci sia l'estensione (il ".")
+			
+			// Controllo che ci sia il suffisso dopo il "."
+			
+			// Controllo che l'estensione sia tra quelle ammesse (rar, zip, tgz)
+		
+		}		
+
+		return true;
+	}
+	
+	// Questo metodo controlla che la struttura della stringa con le info del file sia corretta
+	private boolean checkFileStructure(String file) {
+		
+		String[] destructuredFile = file.split(" "); // 0: Date, 1: Size, 2: File Name
+		String date = destructuredFile[0];
+		String size = destructuredFile[1];
+		String name = destructuredFile[2];
+	 
+		// Controllo che quella sia una data
+		if (!(date instanceof String)) { return false; }
+		try {
+			String[] destructuredDate = date.split("-");
+			int yyyy = Integer.parseInt(destructuredDate[0]);
+			int mm = Integer.parseInt(destructuredDate[1]);
+			int dd = Integer.parseInt(destructuredDate[2]);
+			LocalDate dateObj = LocalDate.of(yyyy, mm, dd);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		
+		// Controllo che la stringa, una volta convertita, sia un'int
+		try {
+			Integer.parseInt(size);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		
+		// Controllo che sia presente il nome del file
+		if (!(name instanceof String)) { return false; }
+		
+		return true;
+	}
+	
 }

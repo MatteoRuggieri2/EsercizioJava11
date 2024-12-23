@@ -47,4 +47,4 @@ LocalDate curDate = LocalDate.of(yyyy, mm, dd);
 ```
 
 Consiglio per il confronto delle date:
-Usa `LocalDate.of(yyy,mm,gg)` per creare una data e `LocalDate.iBefore()` per confrontarla.
+Usa `LocalDate.of(yyyy,mm,gg)` per creare una data e `LocalDate.iBefore()` per confrontarla.
