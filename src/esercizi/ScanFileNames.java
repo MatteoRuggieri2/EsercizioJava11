@@ -228,6 +228,7 @@ public class ScanFileNames {
 			if (!checkFileStructure(file)) { return false; }
 		
 			// Controllo che la dimensione non sia maggiore di 240KB
+			if (!checkFileSize(file, MAX_BYTE_FILE_SIZE)) { return false; }
 			
 			// Controllo che ci sia l'estensione (il ".")
 			
@@ -273,4 +274,12 @@ public class ScanFileNames {
 		return true;
 	}
 	
+	// Questo metodo controlla che la dimensione del file sia minore di quella massima
+	private boolean checkFileSize(String file, int maxSize) {
+		
+		String[] destructuredFile = file.split(" "); // 0: Date, 1: Size, 2: File Name
+		int size = Integer.parseInt(destructuredFile[1]);
+		
+		return size <= maxSize ? true : false;
+	}
 }
