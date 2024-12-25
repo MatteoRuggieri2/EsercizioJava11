@@ -297,8 +297,12 @@ public class ScanFileNames {
 		String fileName = destructuredFileName[0];
 		String suffix = destructuredFileName[1];
 		
-		//TODO Controllo che l'estensione sia tra quelle ammesse (rar, zip, tgz)
+		// Controllo che l'estensione sia tra quelle ammesse (rar, zip, tgz)
+		if (!checkSuffix(ALLOWED_SUFFIX_ARRAY, suffix)) {
+			return false;
+		}
 		
+		return true;
 	}
 	
 	/* Questo metodo controlla che il suffisso fornito sia tra quelli all'interno
