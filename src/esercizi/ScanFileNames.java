@@ -220,6 +220,7 @@ public class ScanFileNames {
 		return filesFilteredBySizeStr.split("\\*sep\\*");
 	}
 	
+	// Questo metodo controlla che la struttura dei file passati come input sia corretta 
 	private boolean checkInput(String[] filesList) {
 		
 		for (String file : filesList) {
@@ -229,12 +230,9 @@ public class ScanFileNames {
 		
 			// Controllo che la dimensione non sia maggiore di 240KB
 			if (!checkFileSize(file, MAX_BYTE_FILE_SIZE)) { return false; }
-			
-			// Controllo che ci sia l'estensione (il ".")
-			
-			// Controllo che ci sia il suffisso dopo il "."
-			
-			// Controllo che l'estensione sia tra quelle ammesse (rar, zip, tgz)
+						
+			// Controllo l'estensione del file
+			if (!checkFileExtension(file)) { return false; }
 		
 		}		
 
@@ -256,7 +254,7 @@ public class ScanFileNames {
 			int yyyy = Integer.parseInt(destructuredDate[0]);
 			int mm = Integer.parseInt(destructuredDate[1]);
 			int dd = Integer.parseInt(destructuredDate[2]);
-			LocalDate dateObj = LocalDate.of(yyyy, mm, dd);
+			LocalDate.of(yyyy, mm, dd);
 		} catch (NumberFormatException e) {
 			return false;
 		}
@@ -282,4 +280,54 @@ public class ScanFileNames {
 		
 		return size <= maxSize ? true : false;
 	}
+	
+	// Questo metodo controlla che sia presente un'estensione (.) e un suffisso tra quelli ammessi (rar, zip, tgz)
+	private boolean checkFileExtension(String file) {
+		String[] destructuredFile = file.split(" "); // 0: Date, 1: Size, 2: File Name
+		String fileFullName = destructuredFile[2]; // Es. name.suffix
+		
+		// Controllo che ci sia l'estensione (il ".")
+		if (!fileFullName.contains(".")) { return false; }
+		
+		String[] destructuredFileName = file.split("."); // 0: name, 1: suffix
+		
+		// Controllo che ci sia il nome e il suffisso dopo il "."
+		if (destructuredFileName.length != 2) { return false; }
+		
+		String fileName = destructuredFileName[0];
+		String suffix = destructuredFileName[1];
+		
+		//TODO Controllo che l'estensione sia tra quelle ammesse (rar, zip, tgz)
+		
+	}
+	
+	/* Questo metodo controlla che il suffisso fornito sia tra quelli all'interno
+	dell'array fornito */
+	private boolean checkSuffix(String[] suffixArray, String suffixToCheck) {
+		for (String suffix : suffixArray) {
+			if (suffix.equals(suffixToCheck)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
