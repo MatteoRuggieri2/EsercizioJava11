@@ -289,12 +289,11 @@ public class ScanFileNames {
 		// Controllo che ci sia l'estensione (il ".")
 		if (!fileFullName.contains(".")) { return false; }
 		
-		String[] destructuredFileName = file.split("."); // 0: name, 1: suffix
+		String[] destructuredFileName = fileFullName.split("\\."); // 0: name, 1: suffix
 		
 		// Controllo che ci sia il nome e il suffisso dopo il "."
 		if (destructuredFileName.length != 2) { return false; }
 		
-		String fileName = destructuredFileName[0];
 		String suffix = destructuredFileName[1];
 		
 		// Controllo che l'estensione sia tra quelle ammesse (rar, zip, tgz)
