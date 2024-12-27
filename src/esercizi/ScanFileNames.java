@@ -67,7 +67,7 @@ public class ScanFileNames {
 		// Se tutti i file sono OK, li filtro e poi li conto. Se sono zero ritorno "NO FILES"
 		
 		// Filtro i file per data
-		this.filesArray = filterFilesByBeforeDate(LIMIT_DATE);
+		this.filesArray = filterFilesByBeforeDate(filesArray, LIMIT_DATE);
 		
 		
 		
@@ -316,12 +316,30 @@ public class ScanFileNames {
 		return false;
 	}
 	
-	private String[] filterFilesByBeforeDate(LocalDate limitDate) {
-		// Per ogni file prendo la data e la confronto
+	/* Questo metodo ritorna un array di stringhe con all'interno i file
+	con data precedente a quella fornita nel paramentro "limitDate". */
+	private String[] filterFilesByBeforeDate(String[] filesArray, LocalDate limitDate) {
 		
-		// Se la data è minore lo salvo
+		String filesFilteredByBeforeDate = "";
 		
-		return ALLOWED_SUFFIX_ARRAY;
+		for (String file : filesArray) {
+			String[] fileInfo = file.split(" ");
+			String fileDateStr = fileInfo[0];
+			String[] destructuredFileDate = fileDateStr.split("-");
+			
+			int yyyy = Integer.parseInt(destructuredFileDate[0]);
+			int mm = Integer.parseInt(destructuredFileDate[1]);
+			int dd = Integer.parseInt(destructuredFileDate[2]);
+			
+			LocalDate fileDate = LocalDate.of(yyyy, mm, dd);
+			
+			if (fileDate.isBefore(limitDate)) {
+				filesFilteredByBeforeDate += file + "*sep*";
+			}
+		}
+		
+		// Aggiorno l'array con i file filtrati per data
+		return filesFilteredByBeforeDate.split("\\*sep\\*");
 	}
 }
 
