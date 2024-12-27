@@ -66,8 +66,8 @@ public class ScanFileNames {
 		
 		// Se tutti i file sono OK, li filtro e poi li conto. Se sono zero ritorno "NO FILES"
 		
-		// Filtro i file per dimensione
-//		this.filesArray = filterFilesBySize(filesArray, MAX_BYTE_FILE_SIZE);
+		// Filtro i file per data
+		this.filesArray = filterFilesByBeforeDate(LIMIT_DATE);
 		
 		
 		
@@ -150,7 +150,7 @@ public class ScanFileNames {
 //		return String.valueOf(validFilesCounter);
 		
 		//test
-		return "";
+		return "ok";
 	}
 	
 	// Sapendo che ognuno è composto da 3 token, conta il numero di file
@@ -204,21 +204,21 @@ public class ScanFileNames {
 	}
 	
 	// Questo metodo filtra i file per la dimensione
-	private String[] filterFilesBySize(String[] filesArray, int maxSize) {
-		
-		String filesFilteredBySizeStr = "";
-		
-		for (String file : filesArray) {
-			String[] fileInfo = file.split(" ");
-			int fileSize = Integer.parseInt(fileInfo[1]);
-			if (fileSize <= maxSize) {
-				filesFilteredBySizeStr += file + "*sep*";
-			}
-		}
-		
-		// Aggiorno l'array con i file filtrati per dimensione
-		return filesFilteredBySizeStr.split("\\*sep\\*");
-	}
+//	private String[] filterFilesBySize(String[] filesArray, int maxSize) {
+//		
+//		String filesFilteredBySizeStr = "";
+//		
+//		for (String file : filesArray) {
+//			String[] fileInfo = file.split(" ");
+//			int fileSize = Integer.parseInt(fileInfo[1]);
+//			if (fileSize <= maxSize) {
+//				filesFilteredBySizeStr += file + "*sep*";
+//			}
+//		}
+//		
+//		// Aggiorno l'array con i file filtrati per dimensione
+//		return filesFilteredBySizeStr.split("\\*sep\\*");
+//	}
 	
 	// Questo metodo controlla che la struttura dei file passati come input sia corretta 
 	private boolean checkInput(String[] filesList) {
@@ -314,6 +314,14 @@ public class ScanFileNames {
 		}
 		
 		return false;
+	}
+	
+	private String[] filterFilesByBeforeDate(LocalDate limitDate) {
+		// Per ogni file prendo la data e la confronto
+		
+		// Se la data è minore lo salvo
+		
+		return ALLOWED_SUFFIX_ARRAY;
 	}
 }
 
