@@ -43,19 +43,6 @@ public class ScanFileNames {
 	
 	public String solution(String s) {
 		
-//		String fileCompleteName = "";  // name + suffix
-//		String fileDate = "";
-//		int fileSize = 0;
-//		String fileName = "";  // name
-//		String fileSuffix = "";
-//		boolean fileDateCheck = false;
-//		boolean fileSizeCheck = false;
-//		boolean fileExtensionCheck = false;
-//		boolean fileSuffixCheck = false;
-//		int validFilesCounter = 0;
-		
-		
-		
 		// Salvo i file della stringa nell'array
 		this.filesArray = saveFilesToArray(s);
 		
@@ -69,88 +56,8 @@ public class ScanFileNames {
 		// Filtro i file per data
 		this.filesArray = filterFilesByBeforeDate(filesArray, LIMIT_DATE);
 		
-		
-		
-//		// Finchè è presente un token
-//		while (sc.hasNext()) {
-//			fileDate = sc.next();
-//			
-//			// Se non rispetta la struttura della stringa ritorno "INPUT INVALID"
-//			if (!sc.hasNextInt()) {
-//				return "INPUT INVALID";
-//			}
-//				
-//			fileSize = sc.nextInt();
-//			
-//			// Se non rispetta la struttura della stringa ritorno "INPUT INVALID"
-//			if (!sc.hasNext()) {
-//				return "INPUT INVALID";
-//			}
-//			
-//			fileCompleteName = sc.next();
-//			
-//			validFilesCounter++;
-//		}
-//		
-//		// Separo la data
-//		String[] dataElementsArray = fileDate.split("-");
-//		
-//		int fileYear = Integer.parseInt(dataElementsArray[0]);
-//		int fileMonth = Integer.parseInt(dataElementsArray[1]);
-//		int fileDay = Integer.parseInt(dataElementsArray[2]);
-//		
-//		// Creo la data con i dati scomposti che mi sono ricavato
-//		LocalDate curDate = LocalDate.of(fileYear, fileMonth, fileDay);
-//
-//		// Se la data è inferiore di 13 ottobre 1995 metto fileDateCheck = TRUE
-//		if (curDate.isBefore(LIMIT_DATE)) {
-//			fileDateCheck = true;
-//		}
-//		
-//		// Se la dimensione del file è inferiore a 240KB metto fileSizeCheck = TRUE
-//		if (fileSize < MAX_BYTE_FILE_SIZE) {
-//			fileSizeCheck = true;
-//		}
-//		
-//		// Se il nome del file contiene l'estensione fileExtensionCheck = TRUE
-//		if (fileCompleteName.contains(".")) {
-//			fileExtensionCheck = true;
-//		}
-//		
-//		// Prendo il nome del file e l'estensione
-//		String[] fileNameAndSuffix = fileCompleteName.split("\\.");
-//		fileName = fileNameAndSuffix[0];
-//		fileSuffix = fileNameAndSuffix[1];
-//		
-//		fileSuffixCheck = false;
-//		
-//		// Se l'estensione del file non è ammessa return INPUT INVALID
-//		for (int i = 0; i < ALLOWED_SUFFIX_ARRAY.length; i++) {
-//			
-//			String allowedSuffix = ALLOWED_SUFFIX_ARRAY[i];
-//			
-//			// Se l'estensione è diversa e sono nell'ultimo giro vuol dire che non c'è l'estensione corretta
-//			if (fileSuffix.equals(allowedSuffix)) {
-//				fileSuffixCheck = true;
-//			}
-//		}
-//		
-//		
-//		// Se maggiore di 240kb, non c'è . , suffisso diverso, INPUT INVALID
-//		if (fileSize > MAX_BYTE_FILE_SIZE || fileExtensionCheck == false || fileSuffixCheck == false) {
-//			return "INPUT INVALID";
-//		}
-//		
-//		// Se ci sono 0 file ritorno "NO FILES"
-//		if (validFilesCounter == 0) {
-//			return "NO FILES";
-//		}
-//		
-//		// Ritorno il numero di file corretti
-//		return String.valueOf(validFilesCounter);
-		
-		//test
-		return "ok";
+		// Return
+		return filesArray.length > 0 ? String.valueOf(filesArray.length) : "NO FILES";
 	}
 	
 	// Sapendo che ognuno è composto da 3 token, conta il numero di file
