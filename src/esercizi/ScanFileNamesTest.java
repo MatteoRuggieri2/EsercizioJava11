@@ -28,12 +28,21 @@ class ScanFileNamesTest {
 	}
 	
 
-//	// Testo la funzione con l'estensione sbagliata
-//	@Test
-//	void testWrongSuffixFiles() {
-//		String filesList = "1994-12-01 845 very-long-filename.pdf";
-//		assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
-//	}
+	// Testo la funzione con l'estensione sbagliata
+	@Test
+	void testWrongSuffixFiles() {
+		String filesList1 = "1988-08-29 956 system.zip "
+				+ "1995-10-12 245760 old-photos.tgz "
+				+ "1989-11-05 245760 file2.rar "
+				+ "1995-10-01 845 very-long-filename.pdf ";
+		assertEquals("INPUT INVALID", scanFileNames.solution(filesList1));
+		
+		String filesList2 = "1988-08-29 956 system.zip "
+				+ "1995-10-12 245760 old-photos.tgz "
+				+ "1989-11-05 245760 file2.rar "
+				+ "1995-10-01 845 very-long-filename.html ";
+		assertEquals("INPUT INVALID", scanFileNames.solution(filesList2));
+	}
 	
 	// Testo la funzione con l'estensione doppia  DOVREBBE DARMI INPUT INVALID, ci sarà un errore con split e l'array creato dallo split
 //	@Test
