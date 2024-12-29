@@ -245,6 +245,10 @@ public class ScanFileNames {
 			}
 		}
 		
+		if (filesFilteredByBeforeDate.equals("")) {
+			return new String[0];
+		}
+		
 		// Aggiorno l'array con i file filtrati per data
 		return filesFilteredByBeforeDate.split("\\*sep\\*");
 	}

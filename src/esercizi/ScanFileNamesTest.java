@@ -65,11 +65,21 @@ class ScanFileNamesTest {
 	}
 	
 	// Testo la funzione senza estensione (.)
-		@Test
-		void testWithoutExtension() {
-			String filesList = "1994-12-01 845 very-long-filenamerar";
-			assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
-		}
+	@Test
+	void testWithoutExtension() {
+		String filesList = "1994-12-01 845 very-long-filenamerar";
+		assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
+	}
+		
+	// Testo la funzione senza estensione (.)
+	@Test
+	void testEmptyString() {
+		String filesList1 = "";
+		assertEquals("NO FILES", scanFileNames.solution(filesList1));
+		
+		String filesList2 = " ";
+		assertEquals("NO FILES", scanFileNames.solution(filesList2));
+	}
 	
 	
 	// senza estensione (.)
