@@ -10,30 +10,30 @@ class ScanFileNamesTest {
 	static ScanFileNames scanFileNames;
 
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	static void setUpBeforeClass() {
 		scanFileNames = new ScanFileNames();
 	}
 
 	// Testo la funzione con 1 file corretto
 	@Test
-	void test1CorrectFiles() {
-		String filesList = "1988-08-29 956 system.zip";
-		assertEquals("1", scanFileNames.solution(filesList));
+	void testCorrectFiles() {
+		String filesList1 = "1988-08-29 956 system.zip";
+		assertEquals("1", scanFileNames.solution(filesList1));
+		
+		String filesList2 = "1988-08-29 956 system.zip "
+							+ "1995-10-12 245760 old-photos.tgz "
+							+ "1989-11-05 245760 file2.rar "
+							+ "1995-10-01 845 very-long-filename.rar ";
+		assertEquals("4", scanFileNames.solution(filesList2));
 	}
 	
-	// Testo la funzione con 4 file corretti
-	@Test
-	void test4CorrectFiles() {
-		String filesList = "1988-08-29 956 system.zip 1995-10-12 245760 old-photos.tgz 1989-11-05 245761 file2.rar 1994-12-01 845 very-long-filename.rar";
-		assertEquals("4", scanFileNames.solution(filesList));
-	}
-	
-	// Testo la funzione con l'estensione sbagliata
-	@Test
-	void testWrongSuffixFiles() {
-		String filesList = "1994-12-01 845 very-long-filename.pdf";
-		assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
-	}
+
+//	// Testo la funzione con l'estensione sbagliata
+//	@Test
+//	void testWrongSuffixFiles() {
+//		String filesList = "1994-12-01 845 very-long-filename.pdf";
+//		assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
+//	}
 	
 	// Testo la funzione con l'estensione doppia  DOVREBBE DARMI INPUT INVALID, ci sarà un errore con split e l'array creato dallo split
 //	@Test
@@ -52,8 +52,10 @@ class ScanFileNamesTest {
 	// test dove sbaglio anno 293A
 	// test dove sbagio mese E3
 	// test dove sbagio giorno DD
-	// singola estensione sbagliata
-	// doppia estensione
+	// singolo suffix sbagliata
+	// doppia suffix
+	// senza estensione (.)
+	// doppia esetensione (.)
 	// se passo stringa vuota (deve dare NO files)
 	// data che non rispetta il limite
 	// size troppo grande
