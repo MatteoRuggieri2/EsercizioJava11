@@ -51,12 +51,18 @@ class ScanFileNamesTest {
 		assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
 	}
 	
-	// Testo la funzione con 1 file corretto
-//	@Test
-//	void testWrongYearFiles() {
-//		String filesList = "19A8-08-29 956 system.zip";
-//		assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
-//	}
+	// Testo la funzione con date errate
+	@Test
+	void testWrongYearFiles() {
+		String filesList1 = "19A8-08-29 956 system.zip";
+		assertEquals("INPUT INVALID", scanFileNames.solution(filesList1));
+		
+		String filesList2 = "1945-MM-29 956 system.zip";
+		assertEquals("INPUT INVALID", scanFileNames.solution(filesList2));
+		
+		String filesList3 = "1965-08-DD 956 system.zip";
+		assertEquals("INPUT INVALID", scanFileNames.solution(filesList3));
+	}
 	
 	// test dove sbaglio anno 293A
 	// test dove sbagio mese E3
