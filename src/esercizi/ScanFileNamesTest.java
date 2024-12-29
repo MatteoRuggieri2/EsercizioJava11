@@ -53,7 +53,7 @@ class ScanFileNamesTest {
 	
 	// Testo la funzione con date errate
 	@Test
-	void testWrongYearFiles() {
+	void testWrongDateFiles() {
 		String filesList1 = "19A8-08-29 956 system.zip";
 		assertEquals("INPUT INVALID", scanFileNames.solution(filesList1));
 		
@@ -64,11 +64,14 @@ class ScanFileNamesTest {
 		assertEquals("INPUT INVALID", scanFileNames.solution(filesList3));
 	}
 	
-	// test dove sbaglio anno 293A
-	// test dove sbagio mese E3
-	// test dove sbagio giorno DD
-	// singolo suffix sbagliata
-	// doppia suffix
+	// Testo la funzione senza estensione (.)
+		@Test
+		void testWithoutExtension() {
+			String filesList = "1994-12-01 845 very-long-filenamerar";
+			assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
+		}
+	
+	
 	// senza estensione (.)
 	// doppia esetensione (.)
 	// se passo stringa vuota (deve dare NO files)
