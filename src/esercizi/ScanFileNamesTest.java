@@ -95,8 +95,11 @@ class ScanFileNamesTest {
 		assertEquals("NO FILES", scanFileNames.solution(filesList2));
 	}
 	
-	
-	// data che non rispetta il limite
-	// size troppo grande
+	// Testo la funzione con una dimensione troppo grande
+	@Test
+	void testOverFileSize() {
+		String filesList = "1994-12-01 245761 very-long-filenamerar";
+		assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
+	}
 
 }
