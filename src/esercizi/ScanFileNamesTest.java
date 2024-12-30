@@ -71,6 +71,13 @@ class ScanFileNamesTest {
 		assertEquals("NO FILES", scanFileNames.solution(filesList));
 	}
 	
+	// Testo la funzione con la data limite (13 Ottobre 1995)
+	@Test
+	void testLimitDate() {
+		String filesList = "1995-10-13 956 system.zip";
+		assertEquals("NO FILES", scanFileNames.solution(filesList));
+	}
+	
 	// Testo la funzione senza estensione (.)
 	@Test
 	void testWithoutExtension() {
