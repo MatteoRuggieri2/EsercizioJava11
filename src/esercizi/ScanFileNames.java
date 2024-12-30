@@ -22,12 +22,6 @@ public class ScanFileNames {
 	//Stringa filefi di esempio: "1988-08-29 956 system.zip"
 	
 	
-	// COSTRUTTORE
-//	public ScanFileNames(String s) {
-//		System.out.println("Counter di file corretti: " + solution(s));
-//	}
-
-	
 	
 	// COSTANT
 	LocalDate LIMIT_DATE = LocalDate.of(1995, 10, 13);
