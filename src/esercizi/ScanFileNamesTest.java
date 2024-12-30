@@ -14,7 +14,7 @@ class ScanFileNamesTest {
 		scanFileNames = new ScanFileNames();
 	}
 
-	// Testo la funzione con 1 file corretto
+	// Testo la funzione con i file corretti
 	@Test
 	void testCorrectFiles() {
 		String filesList1 = "1988-08-29 956 system.zip";
@@ -44,7 +44,7 @@ class ScanFileNamesTest {
 		assertEquals("INPUT INVALID", scanFileNames.solution(filesList2));
 	}
 	
-	// Testo la funzione con l'estensione doppia
+	// Testo la funzione con l'estensione e suffix doppi
 	@Test
 	void testDoubleSuffixFiles() {
 		String filesList = "1994-12-01 845 very-long-filename.rar.zip";
@@ -64,6 +64,13 @@ class ScanFileNamesTest {
 		assertEquals("INPUT INVALID", scanFileNames.solution(filesList3));
 	}
 	
+	// Testo la funzione con una data che supera il limite (> 13 Ottobre 1995)
+	@Test
+	void testNextDate() {
+		String filesList = "1995-10-14 956 system.zip";
+		assertEquals("NO FILES", scanFileNames.solution(filesList));
+	}
+	
 	// Testo la funzione senza estensione (.)
 	@Test
 	void testWithoutExtension() {
@@ -71,7 +78,7 @@ class ScanFileNamesTest {
 		assertEquals("INPUT INVALID", scanFileNames.solution(filesList));
 	}
 		
-	// Testo la funzione senza estensione (.)
+	// Testo la funzione con una stringa vuota passata
 	@Test
 	void testEmptyString() {
 		String filesList1 = "";
@@ -82,9 +89,6 @@ class ScanFileNamesTest {
 	}
 	
 	
-	// senza estensione (.)
-	// doppia esetensione (.)
-	// se passo stringa vuota (deve dare NO files)
 	// data che non rispetta il limite
 	// size troppo grande
 
